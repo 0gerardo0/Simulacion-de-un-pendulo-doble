@@ -1,0 +1,1 @@
+var Reference;(function(){function i(){r()}function r(){var t=_d.querySelector(".df_c .df_img"),i=_d.querySelector(".df_c .df_img_attr");t&&sj_be(t,"click",function(){n("QnA_Image","TOP")});i&&sj_be(i,"click",function(){n("QnA_Image_Attr","TOP")})}function n(n,i){Log&&Log.Log&&Log.Log("DHTMLClick",1,t,!1,"Title",n,"Pos",i)}var t="ReferenceQnA";i()})(Reference||(Reference={}))

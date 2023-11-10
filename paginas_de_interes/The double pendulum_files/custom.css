@@ -1,0 +1,146 @@
+html { 
+  background: url(/static/img/log-spiral.svg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+body {
+  background-color: transparent;
+}
+
+h7 {
+   /* background-color: #000;*/
+    height: 149px;
+    color: #ff0;
+    font-size: 48pt;
+    background-image: url("/static/img/header.png");
+}
+
+p.answer_link {
+    text-decoration: underline;
+    cursor: pointer;
+}
+p.answer_rubric {
+    font-size: small;
+    color: #888888;
+}
+
+h5 {
+    font-weight: bold;
+    font-size: 110%;
+}
+
+div.index-container {
+    margin-top: 40px;
+}
+
+div.frontpage-panel img {
+    display: block;
+    margin: auto;
+}
+
+div.frontpage-panel div.panel-heading {
+   font-size: 24px;
+}
+
+/* Inline code to be in regular black monospace with no background... */
+code {
+    color: black;
+    background-color: transparent;
+}
+
+/* ...code inline that happens to be a link should show up in link colour with
+   an underline, though */
+a code {
+  color: #18bc9c;
+  text-decoration: underline;
+}
+
+/* Centered images which resize without distortion for smaller devices */
+img.fig {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    
+}
+
+div.attrib {
+    font-size: 85%;
+}
+
+table.my-table {
+    margin: 0 auto 20px auto;
+}
+table.my-table tr th {
+    text-align: center;
+}
+table.my-table tr th,td {
+    padding: 0 10px;
+}
+
+table.data-table {
+    text-align: center;
+    border-bottom: solid 1px black;
+}
+table.data-table thead tr {
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+}
+
+/* Super-custom styles for specific elements go here. */
+
+table.truth-table thead tr {
+    font-family: monospace;
+}
+table.truth-table tbody {
+    font-family: monospace;
+}
+
+/* This table has two header lines; we don't want a border between them. */
+table.snakes-and-ladders-table thead tr:first-child {
+    border-bottom: none;
+}
+table.snakes-and-ladders-table thead tr:last-child {
+    border-top: none;
+}
+
+table.bond-lengths-table {
+    width: 300px;
+}
+
+/* A table for the semi-empirical mass formula parameter descriptions */
+table.SEMF-table {
+    text-align: left;
+}
+
+table.SEMF-table th.SEMF-value {
+    width: 20%;
+}
+
+img.blog-post-image {
+    width: 100%;
+    max-width: 600px;
+}
+
+.videowrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        padding-top: 25px;
+        height: 0;
+}
+.videowrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+}
+
+div.extra-info {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #eeeeee;
+}

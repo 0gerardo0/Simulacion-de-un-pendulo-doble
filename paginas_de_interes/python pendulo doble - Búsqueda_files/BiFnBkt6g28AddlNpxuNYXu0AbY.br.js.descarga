@@ -1,0 +1,1 @@
+var Reference;(function(n){var t;(function(n){function t(){var n=_d.querySelector("div.df_ih");typeof IRH!="undefined"&&(_w.imageRichHover=new IRH,_w.imageRichHover.IsInitialized&&_w.imageRichHover.attach(n,["a"]))}n.init=t})(t=n.ImageHover||(n.ImageHover={}))})(Reference||(Reference={}));Reference.ImageHover.init()
