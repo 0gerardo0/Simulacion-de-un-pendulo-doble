@@ -29,7 +29,8 @@ def ecua_mov(y, t, L1, L2, m1, m2):
 # Parametros de inicializacion: theta1, theta1_p, theta2, theta2_p 
 y0 = np.array([3*np.pi/4, 0, np.pi/2, 0])
 
-# Solucion numerica por el  metodo de Método de Dormand-Prince de orden 8(5,3) [Para utilizar otro solo de cambia method]
+# Solucion numerica por el metodo de Método de Dormand-Prince de orden 8(5,3) [Para utilizar otro solo de cambia method]
+# Solucion numerica scipy 
 tmax, dt = 30, 0.01 #Tiempo de simulacion y diferencial de pasos
 t=np.arange(0, tmax+dt, dt)
 y = odeint(ecua_mov, y0, t, args=(L1, L2, m1, m2))
