@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
+
 # Definición de parámetros
 g = 9.81  # aceleración debida a la gravedad
 m = 1.0   # por definir, masa

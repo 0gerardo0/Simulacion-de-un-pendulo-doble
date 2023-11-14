@@ -4,26 +4,28 @@ from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 
-# Longitudes de las varillas del péndulo (m), masas de los pesos (kg).
-L1, L2 = 2, 2
+# Pendulum rod lengths (m), bob masses (kg).
+L1, L2 = 1, 1
 m1, m2 = 1, 1
-# Aceleración gravitatoria (m/s^2).
+# The gravitational acceleration (m.s-2).
 g = 9.81
 
 def deriv(y, t, L1, L2, m1, m2):
-    """Devuelve las primeras derivadas de y = theta1, z1, theta2, z2."""
+    """Return the first derivatives of y = theta1, z1, theta2, z2."""
     theta1, z1, theta2, z2 = y
 
     c, s = np.cos(theta1-theta2), np.sin(theta1-theta2)
 
     theta1dot = z1
-    z1dot = (m2*g*np.sin(theta2)*c - m2*s*(L1*z1**2*c + L2*z2**2) - (m1+m2)*g*np.sin(theta1)) / L1 / (m1 + m2*s**2)
+    z1dot = (m2*g*np.sin(theta2)*c - m2*s*(L1*z1**2*c + L2*z2**2) -
+             (m1+m2)*g*np.sin(theta1)) / L1 / (m1 + m2*s**2)
     theta2dot = z2
-    z2dot = ((m1+m2)*(L1*z1**2*s - g*np.sin(theta2) + g*np.sin(theta1)*c) +  m2*L2*z2**2*s*c) / L2 / (m1 + m2*s**2)
+    z2dot = ((m1+m2)*(L1*z1**2*s - g*np.sin(theta2) + g*np.sin(theta1)*c) + 
+             m2*L2*z2**2*s*c) / L2 / (m1 + m2*s**2)
     return theta1dot, z1dot, theta2dot, z2dot
 
 def calc_E(y):
-    """Devuelve la energía total del sistema."""
+    """Return the total energy of the system."""
 
     th1, th1d, th2, th2d = y.T
     V = -(m1+m2)*L1*g*np.cos(th1) - m2*L2*g*np.cos(th2)
@@ -31,13 +33,13 @@ def calc_E(y):
             2*L1*L2*th1d*th2d*np.cos(th1-th2))
     return T + V
 
-# Tiempo máximo, espaciado de puntos de tiempo y la cuadrícula de tiempo (todo en s).
-tmax, dt = 10, 0.1
+# Maximum time, time point spacings and the time grid (all in s).
+tmax, dt = 30, 0.01
 t = np.arange(0, tmax+dt, dt)
-# Condiciones iniciales: theta1, dtheta1/dt, theta2, dtheta2/dt.
+# Initial conditions: theta1, dtheta1/dt, theta2, dtheta2/dt.
 y0 = np.array([3*np.pi/7, 0, 3*np.pi/4, 0])
 
-# Realiza la integración numérica de las ecuaciones de movimiento
+# Do the numerical integration of the equations of motion
 y = odeint(deriv, y0, t, args=(L1, L2, m1, m2))
 
 energia_total = calc_E(y)
@@ -48,35 +50,35 @@ for i, energia in enumerate(energia_total):
     acumulado_errores = [error_energia] if i == 0 else acumulado_errores + [acumulado_errores[-1] + error_energia]
     print(f"Tiempo {t[i]:.2f} s, Energía Total: {energia:.6f} J, Error de Energía: {error_energia:.10f} J, Suma Acumulada: {acumulado_errores[-1]:.10f} J")
 
-# Verifica que el cálculo conserve la energía total dentro de cierta tolerancia.
-EDRIFT = 0.00009
-# Energía total a partir de las condiciones iniciales
+# Check that the calculation conserves total energy to within some tolerance.
+EDRIFT = 0.06
+# Total energy from the initial conditions
 E = calc_E(y0)
-if np.max(np.max(np.abs(calc_E(y) - E))) > EDRIFT:
-    sys.exit('La deriva máxima de energía de {} excedida .'.format(EDRIFT))
+if np.max(np.sum(np.abs(calc_E(y) - E))) > EDRIFT:
+    sys.exit('Maximum energy drift of {} exceeded.'.format(EDRIFT))
 
-# Desempaqueta z y theta como función del tiempo
+# Unpack z and theta as a function of time
 theta1, theta2 = y[:,0], y[:,2]
 
-# Convierte a coordenadas cartesianas de las posiciones de los dos pesos.
+# Convert to Cartesian coordinates of the two bob positions.
 x1 = L1 * np.sin(theta1)
 y1 = -L1 * np.cos(theta1)
 x2 = x1 + L2 * np.sin(theta2)
 y2 = y1 - L2 * np.cos(theta2)
 
-# Radio del círculo representando los pesos
+# Plotted bob circle radius
 r = 0.05
-# Traza la trayectoria del peso m2 durante los últimos segundos de trail_secs.
+# Plot a trail of the m2 bob's position for the last trail_secs seconds.
 trail_secs = 1
-# Esto corresponde a un máximo de puntos de tiempo de max_trail.
+# This corresponds to max_trail time points.
 max_trail = int(trail_secs / dt)
 
 def make_plot(i):
-    # Dibuja y guarda una imagen de la configuración del péndulo doble para el
-    # punto de tiempo i.
-    # Las varillas del péndulo.
+    # Plot and save an image of the double pendulum configuration for time
+    # point i.
+    # The pendulum rods.
     ax.plot([0, x1[i], x2[i]], [0, y1[i], y2[i]], lw=2, c='k')
-    # Círculos representando el punto de anclaje de la varilla 1, y los pesos 1 y 2.
+    # Circles representing the anchor point of rod 1, and bobs 1 and 2.
     c0 = Circle((0, 0), r/2, fc='k', zorder=10)
     c1 = Circle((x1[i], y1[i]), r, fc='b', ec='b', zorder=10)
     c2 = Circle((x2[i], y2[i]), r, fc='r', ec='r', zorder=10)
@@ -84,7 +86,7 @@ def make_plot(i):
     ax.add_patch(c1)
     ax.add_patch(c2)
 
-    # La trayectoria se dividirá en ns segmentos y se dibujará como una línea que se desvanece.
+    # The trail will be divided into ns segments and plotted as a fading line.
     ns = 20
     s = max_trail // ns
 
@@ -93,13 +95,13 @@ def make_plot(i):
         if imin < 0:
             continue
         imax = imin + s + 1
-        # El efecto de desvanecimiento se ve mejor si cuadramos la longitud fraccional a lo largo de la
-        # trayectoria.
+        # The fading looks better if we square the fractional length along the
+        # trail.
         alpha = (j/ns)**2
         ax.plot(x2[imin:imax], y2[imin:imax], c='r', solid_capstyle='butt',
                 lw=2, alpha=alpha)
 
-    # Centra la imagen en el punto de anclaje fijo, y asegura que los ejes sean iguales
+    # Centre the image on the fixed anchor point, and ensure the axes are equal
     ax.set_xlim(-L1-L2-r, L1+L2+r)
     ax.set_ylim(-L1-L2-r, L1+L2+r)
     ax.set_aspect('equal', adjustable='box')
@@ -107,15 +109,15 @@ def make_plot(i):
     plt.savefig('frames/_img{:04d}.png'.format(i//di), dpi=72)
     plt.cla()
 
-# Crea una imagen cada di puntos de tiempo, correspondiente a una tasa de fotogramas de fps
-# fotogramas por segundo.
-# Tasa de fotogramas, s-1
+
+# Make an image every di time points, corresponding to a frame rate of fps
+# frames per second.
+# Frame rate, s-1
 fps = 10
 di = int(1/fps/dt)
 fig = plt.figure(figsize=(8.3333, 6.25), dpi=72)
 ax = fig.add_subplot(111)
-'''
+
 for i in range(0, t.size, di):
     print(i // di, '/', t.size // di)
     make_plot(i)
-'''
