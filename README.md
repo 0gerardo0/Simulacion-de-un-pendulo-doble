@@ -23,7 +23,7 @@ Ejecute el programa con Python. Los parámetros de la simulación se pueden ajus
 
 ```dt```: Paso de tiempo para la simulación.
 
-```error_tolerancia```: Puede ser cambiado si es que la solucion tiene un error acomulado excedente. 
+```error_tolerancia```: Tolerancia de error de la conservacion de la energia.
 
 ## Métodos
 ```energia_del_sistema(y)```: Calcula la energía total del sistema.

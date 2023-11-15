@@ -1,4 +1,7 @@
 # Programa de Simulación de Péndulo Doble
+
+![Visuazlizacion_pendulo](movimiento_pendulo.gif)
+
 ## Descripción General
 Este programa en Python simula el movimiento de un péndulo doble utilizando las ecuaciones del lagrangiano. Calcula la trayectoria de cada masa del péndulo a lo largo del tiempo, visualiza su movimiento y verifica la conservación de la energía en el sistema.
 
@@ -23,7 +26,7 @@ Ejecute el programa con Python. Los parámetros de la simulación se pueden ajus
 
 ```dt```: Paso de tiempo para la simulación.
 
-```error_tolerancia```: Puede ser cambiado si es que la solucion tiene un error acomulado excedente. 
+```error_tolerancia```: Tolerancia de error de la conservacion de la energia. 
 
 ## Métodos
 ```energia_del_sistema(y)```: Calcula la energía total del sistema.
@@ -39,7 +42,9 @@ Ejecute el programa con Python. Los parámetros de la simulación se pueden ajus
 --> Ah mas se baja el ```dt``` es mejor el calculo, pero eso indica que tomara mas tiempo computacional, se generaran mas imagenes dependiendo el ```tmax``` y el ```dt```.
 
 --> Para que el script genere las imagenes mas rapido se pueden comentar las impresiones del error y el numero de frame guardado.
+
 ```46  print(f"Tiempo {t[i]:.2f} s, Energía Total: {energia:.6f} J, Error de Energía: {error_energia:.2f} J, Suma Acumulada: {acumulado_errores[-1]:.2f} J")```
+
 ```90  print(i // frame, '/', t.size // frame)```
 
 --> Descomente ```#from scipy.integrate import solve_ivp``` y ```#sol = solve_ivp(...)``` para usar el método Dormand-Prince. Intercambiar ```ecua_mov(t, y, L1, L2, m1, m2)```. La verdad no es muy bueno este metodo, no aproxima bien la solucion, hay un error bastante grande.
