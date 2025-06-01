@@ -59,8 +59,6 @@ coverage.xml
 
 # Archivos generados
 trayectoria/
-movimiento_pendulo.mp4
-movimiento_pendulo.gif
 
 # Archivos comprimidos
 *.zip
