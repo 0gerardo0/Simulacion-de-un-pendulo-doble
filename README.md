@@ -7,7 +7,10 @@ Este programa en Python simula el movimiento de un péndulo doble utilizando las
 
 ## Instalación
 Se requieren algunas bibliotecas externas que se pueden instalar a través de pip:
+
+
 ```python -m venv venv```
+
 
 ```source venv/bin/activate```
 
@@ -18,6 +21,9 @@ Se requieren algunas bibliotecas externas que se pueden instalar a través de pi
 Ejecute el programa con Python. Los parámetros de la simulación se pueden ajustar según sea necesario.
 
 ```python mov_anim_modif.py```
+
+
+```python makevideo.py``` => Genera un video y un gif con la simulacion animada.
 
 ## Parámetros Modificables
 ```L1, L2```: Longitudes de los brazos del primer y segundo péndulo.
