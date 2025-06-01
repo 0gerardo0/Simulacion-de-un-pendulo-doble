@@ -1,6 +1,6 @@
 # Programa de Simulación de Péndulo Doble
 
-![Visuazlizacion_pendulo](/program_pendulo/movimiento_pendulo.gif)
+![Visuazlizacion_pendulo](movimiento_pendulo.gif)
 
 ## Descripción General
 Este programa en Python simula el movimiento de un péndulo doble utilizando las ecuaciones del lagrangiano. Calcula la trayectoria de cada masa del péndulo a lo largo del tiempo, visualiza su movimiento y verifica la conservación de la energía en el sistema.
