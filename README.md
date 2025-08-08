@@ -15,7 +15,7 @@ Se requieren algunas bibliotecas externas que se pueden instalar a través de pi
 ```source venv/bin/activate```
 
 
-```pip install -r modulos_requeridos.txt```
+```pip install -r requirements.txt```
 
 ## Cómo Usar
 Ejecute el programa con Python. Los parámetros de la simulación se pueden ajustar según sea necesario.
